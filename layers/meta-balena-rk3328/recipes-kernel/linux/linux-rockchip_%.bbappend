@@ -10,7 +10,6 @@ python () {
 }
 
 SRC_URI:append = " file://0001-rk3328-evb-dts-rng.patch \
-    file://0002-uart_fix.patch \
 "
 
 # we disable Rockchip wifi stack since we currently do not support the external wifi module (will revisit bt / wifi in case it's required by customers)
