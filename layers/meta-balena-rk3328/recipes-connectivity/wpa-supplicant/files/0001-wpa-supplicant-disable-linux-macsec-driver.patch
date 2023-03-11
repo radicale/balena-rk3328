@@ -1,0 +1,11 @@
+--- a/wpa_supplicant/defconfig	2022-01-16 21:51:29.000000000 +0100
++++ b/wpa_supplicant/defconfig	2023-03-11 12:20:18.287905993 +0100
+@@ -77,7 +77,7 @@
+ #CONFIG_DRIVER_MACSEC_QCA=y
+ 
+ # Driver interface for Linux MACsec drivers
+-CONFIG_DRIVER_MACSEC_LINUX=y
++#CONFIG_DRIVER_MACSEC_LINUX=y
+ 
+ # Driver interface for the Broadcom RoboSwitch family
+ #CONFIG_DRIVER_ROBOSWITCH=y
