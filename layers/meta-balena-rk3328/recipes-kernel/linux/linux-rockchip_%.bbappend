@@ -10,6 +10,8 @@ python () {
 }
 
 SRC_URI:append = " file://0001-rk3328-evb-dts-rng.patch \
+    file://0002-rk3328-evb-dts-spi0.patch \
+    file://dwmac-rockchip.cfg \
 "
 
 # we disable Rockchip wifi stack since we currently do not support the external wifi module (will revisit bt / wifi in case it's required by customers)
