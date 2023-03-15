@@ -1,6 +1,43 @@
 # v2.105.10
 ## (2022-10-13)
 
+# v2.112.14+rev2
+## (2023-03-15)
+
+
+<details>
+<summary> Update contracts to 40d6eaa3f0455babd1abcc1d11a6e6db60387797 [Renovate Bot] </summary>
+
+> ## contracts-2.0.51
+> ### (2023-02-24)
+> 
+> * node: do not set unsafe-perm with npm 9 and newer [Michal Toman]
+> 
+
+</details>
+
+# v2.112.14+rev1
+## (2023-03-15)
+
+
+<details>
+<summary> Update balena-yocto-scripts to 93f94ff88593966c1f417861b235e729d5192ba6 [Renovate Bot] </summary>
+
+> ## balena-yocto-scripts-1.19.25
+> ### (2023-03-01)
+> 
+> * Dockerfile: yocto-build-env: update balenaCLI to 14.5.15 [Alex Gonzalez]
+> 
+> ## balena-yocto-scripts-1.19.24
+> ### (2023-02-28)
+> 
+> * balena-api: ignore quotes from API replies [Alex Gonzalez]
+> 
+
+</details>
+
+* trigger deploy builds on multi-digit revisions too [Alex Gonzalez]
+
 # v2.112.14
 ## (2023-02-22)
 
