@@ -1,5 +1,5 @@
 # Supported machines
-#MACHINE ?= "heltec-m2808"
+MACHINE ?= "heltec-m2808"
 
 # temporarily disable kernel headers in order to circumvent a compile issue of kernel-headers-test
 BALENA_DISABLE_KERNEL_HEADERS = "1"
@@ -28,7 +28,7 @@ PARALLEL_MAKE ?= "-j ${@oe.utils.cpu_count()}"
 DISTRO ?= "resin-systemd"
 
 # Custom downloads directory
-#DL_DIR ?= "${TOPDIR}/downloads"
+DL_DIR ?= "${TOPDIR}/../../downloads"
 
 # Custom sstate directory
 #SSTATE_DIR ?= "${TOPDIR}/sstate-cache"
@@ -59,5 +59,3 @@ BB_DISKMON_DIRS = "\
 CONF_VERSION = "2"
 
 HOSTTOOLS += "docker iptables"
-
-PARTITION_TABLE_TYPE = "gpt"
