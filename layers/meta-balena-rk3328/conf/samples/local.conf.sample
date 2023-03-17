@@ -28,7 +28,7 @@ PARALLEL_MAKE ?= "-j ${@oe.utils.cpu_count()}"
 DISTRO ?= "resin-systemd"
 
 # Custom downloads directory
-DL_DIR ?= "${TOPDIR}/../../downloads"
+#DL_DIR ?= "${TOPDIR}/../../downloads"
 
 # Custom sstate directory
 #SSTATE_DIR ?= "${TOPDIR}/sstate-cache"
