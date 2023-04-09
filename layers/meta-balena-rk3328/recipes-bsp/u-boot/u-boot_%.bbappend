@@ -2,8 +2,18 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 UBOOT_KCONFIG_SUPPORT = "1"
 inherit resin-u-boot
 
+#BALENA_BOOT_PART = "3"
+#BALENA_DEFAULT_ROOT_PART = "4"
+
 SRC_URI:append = " \
-    file://balenaos_bootcommand.cfg \
+    file://0001-Integrate-with-Balena-u-boot-environment.patch \
+    file://bootcommand.patch \
+"
+
+SRC_URI:append:heltec-m2808 = " \
+    file://u-boot-rk3328-heltec-m2808-dts.patch \
+    file://u-boot-rk3328-heltec-m2808-defconfig.patch \
+    file://firefly.cfg \
 "
 
 do_install:append() {

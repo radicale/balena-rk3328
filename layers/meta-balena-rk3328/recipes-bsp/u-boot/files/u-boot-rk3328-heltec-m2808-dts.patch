@@ -1,0 +1,284 @@
+diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
+index b834bc3..9c59e01 100644
+--- a/arch/arm/dts/Makefile
++++ b/arch/arm/dts/Makefile
+@@ -36,6 +36,7 @@ dtb-$(CONFIG_ARCH_ROCKCHIP) += \
+ 	rk3288-evb.dtb \
+ 	rk3288-fennec.dtb \
+ 	rk3288-firefly.dtb \
++	rk3328-heltec-m2808.dtb \
+ 	rk3288-miqi.dtb \
+ 	rk3288-phycore-rdk.dtb \
+ 	rk3288-popmetal.dtb \
+diff --git a/arch/arm/dts/rk3328-heltec-m2808.dts b/arch/arm/dts/rk3328-heltec-m2808.dts
+new file mode 100644
+index 0000000..d23cefb
+--- /dev/null
++++ b/arch/arm/dts/rk3328-heltec-m2808.dts
+@@ -0,0 +1,266 @@
++/dts-v1/;
++
++/ {
++	#address-cells = <0x02>;
++	#size-cells = <0x02>;
++	compatible = "rockchip,rk3328-evb\0rockchip,rk3328";
++	model = "Rockchip RK3328 EVB";
++
++	adc-keys {
++		compatible = "adc-keys";
++		io-channel-names = "buttons";
++		io-channels = <0x3f 0x00>;
++		keyup-threshold-microvolt = <0x1b7740>;
++		status = "okay";
++		u-boot,dm-pre-reloc;
++
++		vol-up-key {
++			label = "volume up";
++			linux,code = <0x73>;
++			press-threshold-microvolt = <0x2710>;
++			u-boot,dm-pre-reloc;
++		};
++	};
++
++	aliases {
++		mmc0 = "/rksdmmc@ff520000";
++		mmc1 = "/rksdmmc@ff500000";
++		serial2 = "/serial@ff130000";
++	};
++
++	chosen {
++		stdout-path = "/serial@ff130000";
++		u-boot,spl-boot-order = "/rksdmmc@ff500000\0/rksdmmc@ff520000";
++	};
++
++	clock-controller@ff440000 {
++		#clock-cells = <0x01>;
++		#reset-cells = <0x01>;
++		compatible = "rockchip,rk3328-cru\0rockchip,cru\0syscon";
++		phandle = <0x07>;
++		reg = <0x00 0xff440000 0x00 0x1000>;
++		rockchip,grf = <0x22>;
++		u-boot,dm-pre-reloc;
++	};
++
++	dmc {
++		compatible = "rockchip,rk3328-dmc";
++		reg = <0x00 0xff400000 0x00 0x1000 0x00 0xff780000 0x00 0x3000 0x00 0xff100000 0x00 0x1000 0x00 0xff440000 0x00 0x1000 0x00 0xff720000 0x00 0x1000 0x00 0xff798000 0x00 0x1000>;
++		rockchip,sdram-params = <0x01 0x0c 0x03 0x01 0x00 0x00 0x10 0x10 0x10 0x10 0x00 0x9028b189 0x00 0x21 0x482 0x15 0x222 0xff 0x14d 0x03 0x01 0x00 0x00 0x00 0x43041001 0x64 0x28003b 0xd0 0x20053 0xd4 0x20000 0xd8 0x100 0xdc 0x3200000 0xe0 0x00 0xe4 0x90000 0xf4 0xf011f 0x100 0x7090b06 0x104 0x50209 0x108 0x3030407 0x10c 0x202006 0x110 0x3020204 0x114 0x3030202 0x120 0x903 0x180 0x800020 0x184 0x00 0x190 0x7010001 0x198 0x5001100 0x1a0 0xc0400003 0x240 0x6000604 0x244 0x201 0x250 0xf00 0x490 0x01 0xffffffff 0xffffffff 0xffffffff 0xffffffff 0xffffffff 0xffffffff 0xffffffff 0xffffffff 0xffffffff 0xffffffff 0x04 0x0a 0x28 0x06 0x2c 0x00 0x30 0x05 0xffffffff 0xffffffff 0x77 0x88 0x79 0x79 0x87 0x97 0x87 0x78 0x77 0x78 0x87 0x88 0x87 0x87 0x77 0x78 0x78 0x78 0x78 0x78 0x78 0x78 0x78 0x78 0x69 0x09 0x77 0x78 0x77 0x78 0x77 0x78 0x77 0x78 0x77 0x79 0x09 0x78 0x78 0x78 0x78 0x78 0x78 0x78 0x78 0x78 0x69 0x09 0x77 0x78 0x77 0x77 0x77 0x77 0x77 0x77 0x77 0x79 0x09 0x78 0x78 0x78 0x78 0x78 0x78 0x78 0x78 0x78 0x69 0x09 0x77 0x78 0x77 0x78 0x77 0x78 0x77 0x78 0x77 0x79 0x09 0x78 0x78 0x78 0x78 0x78 0x78 0x78 0x78 0x78 0x69 0x09 0x77 0x78 0x77 0x77 0x77 0x77 0x77 0x77 0x77 0x79 0x09>;
++		u-boot,dm-pre-reloc;
++	};
++
++	pinctrl {
++		#address-cells = <0x02>;
++		#size-cells = <0x02>;
++		compatible = "rockchip,rk3328-pinctrl";
++		ranges;
++		rockchip,grf = <0x22>;
++		u-boot,dm-spl;
++
++		sdmmc0 {
++
++			sdmmc0-bus4 {
++				phandle = <0x27>;
++				rockchip,pins = <0x01 0x00 0x01 0x37 0x01 0x01 0x01 0x37 0x01 0x02 0x01 0x37 0x01 0x03 0x01 0x37>;
++				u-boot,dm-spl;
++			};
++
++			sdmmc0-clk {
++				phandle = <0x24>;
++				rockchip,pins = <0x01 0x06 0x01 0x38>;
++				u-boot,dm-spl;
++			};
++
++			sdmmc0-cmd {
++				phandle = <0x25>;
++				rockchip,pins = <0x01 0x04 0x01 0x37>;
++				u-boot,dm-spl;
++			};
++
++			sdmmc0-dectn {
++				phandle = <0x26>;
++				rockchip,pins = <0x01 0x05 0x01 0x37>;
++				u-boot,dm-spl;
++			};
++		};
++	};
++
++	rksdmmc@ff500000 {
++		bus-width = <0x04>;
++		cap-mmc-highspeed;
++		cap-sd-highspeed;
++		card-detect-delay = <0xc8>;
++		clock-names = "biu\0ciu\0ciu-drv\0ciu-sample";
++		clocks = <0x07 0x13d 0x07 0x21 0x07 0x4a 0x07 0x4e>;
++		compatible = "rockchip,rk3328-dw-mshc\0rockchip,rk3288-dw-mshc";
++		disable-wp;
++		fifo-depth = <0x100>;
++		interrupts = <0x00 0x0c 0x04>;
++		max-frequency = <0x8f0d180>;
++		num-slots = <0x01>;
++		reg = <0x00 0xff500000 0x00 0x4000>;
++		status = "okay";
++		u-boot,dm-spl;
++		vmmc-supply = <0x28>;
++	};
++
++	rksdmmc@ff520000 {
++		bus-width = <0x08>;
++		cap-mmc-highspeed;
++		clock-names = "biu\0ciu\0ciu-drv\0ciu-sample";
++		clocks = <0x07 0x13f 0x07 0x23 0x07 0x4c 0x07 0x50>;
++		compatible = "rockchip,rk3328-dw-mshc\0rockchip,rk3288-dw-mshc";
++		disable-wp;
++		fifo-depth = <0x100>;
++		interrupts = <0x00 0x0e 0x04>;
++		max-frequency = <0x8f0d180>;
++		non-removable;
++		num-slots = <0x01>;
++		reg = <0x00 0xff520000 0x00 0x4000>;
++		status = "okay";
++		supports-emmc;
++		u-boot,dm-spl;
++	};
++
++	saradc@ff280000 {
++		#io-channel-cells = <0x01>;
++		clock-names = "saradc\0apb_pclk";
++		clocks = <0x07 0x25 0x07 0xea>;
++		compatible = "rockchip,rk3328-saradc\0rockchip,saradc";
++		interrupts = <0x00 0x50 0x04>;
++		phandle = <0x3f>;
++		reg = <0x00 0xff280000 0x00 0x100>;
++		reset-names = "saradc-apb";
++		resets = <0x07 0x56>;
++		status = "okay";
++		u-boot,dm-spl;
++	};
++
++	sdmmc-pwren {
++		compatible = "regulator-fixed";
++		gpio = <0x40 0x1e 0x01>;
++		phandle = <0x28>;
++		regulator-always-on;
++		regulator-boot-on;
++		regulator-name = "vcc3v3";
++		u-boot,dm-spl;
++	};
++
++	serial@ff130000 {
++		#dma-cells = <0x02>;
++		clock-frequency = <0x16e3600>;
++		clock-names = "baudclk\0apb_pclk";
++		clocks = <0x07 0x28 0x07 0xd4>;
++		compatible = "rockchip,rk3328-uart\0snps,dw-apb-uart";
++		dmas = <0x08 0x06 0x08 0x07>;
++		interrupts = <0x00 0x39 0x04>;
++		reg = <0x00 0xff130000 0x00 0x100>;
++		reg-io-width = <0x04>;
++		reg-shift = <0x02>;
++		status = "okay";
++		u-boot,dm-pre-reloc;
++	};
++
++	syscon-usb@ff450000 {
++		#address-cells = <0x01>;
++		#size-cells = <0x01>;
++		compatible = "rockchip,rk3328-usb2phy-grf\0simple-mfd\0syscon";
++		reg = <0x00 0xff450000 0x00 0x10000>;
++		u-boot,dm-spl;
++
++		usb2-phy@100 {
++			#phy-cells = <0x01>;
++			compatible = "rockchip,rk3328-usb2phy";
++			reg = <0x100 0x10>;
++			status = "okay";
++			u-boot,dm-spl;
++
++			host-port {
++				#phy-cells = <0x00>;
++				interrupt-names = "linestate";
++				interrupts = <0x00 0x3e 0x04>;
++				phandle = <0x30>;
++				status = "okay";
++				u-boot,dm-spl;
++			};
++
++			otg-port {
++				#phy-cells = <0x00>;
++				interrupt-names = "otg-bvalid\0otg-id\0linestate";
++				interrupts = <0x00 0x3b 0x04 0x00 0x3c 0x04 0x00 0x3d 0x04>;
++				phandle = <0x32>;
++				status = "okay";
++				u-boot,dm-spl;
++			};
++		};
++	};
++
++	syscon@ff100000 {
++		#address-cells = <0x01>;
++		#size-cells = <0x01>;
++		compatible = "rockchip,rk3328-grf\0syscon\0simple-mfd";
++		phandle = <0x22>;
++		reg = <0x00 0xff100000 0x00 0x1000>;
++		u-boot,dm-pre-reloc;
++	};
++
++	usb@ff580000 {
++		compatible = "rockchip,rk3328-usb\0rockchip,rk3066-usb\0snps,dwc2";
++		dr_mode = "otg";
++		hnp-srp-disable;
++		interrupts = <0x00 0x17 0x04>;
++		phy-names = "usb";
++		phys = <0x32>;
++		reg = <0x00 0xff580000 0x00 0x40000>;
++		status = "okay";
++		u-boot,dm-spl;
++		vbus-supply = <0x31>;
++	};
++
++	usb@ff5c0000 {
++		compatible = "generic-ehci";
++		interrupts = <0x00 0x10 0x04>;
++		phy-names = "usb";
++		phys = <0x30>;
++		reg = <0x00 0xff5c0000 0x00 0x10000>;
++		status = "okay";
++		u-boot,dm-spl;
++		vbus-supply = <0x31>;
++	};
++
++	usb@ff600000 {
++		compatible = "rockchip,rk3328-xhci";
++		interrupts = <0x00 0x43 0x04>;
++		reg = <0x00 0xff600000 0x00 0x100000>;
++		snps,dis-enblslpm-quirk;
++		snps,dis-u2-freeclk-exists-quirk;
++		snps,dis-u2-susphy-quirk;
++		snps,phyif-utmi-bits = <0x10>;
++		status = "okay";
++		u-boot,dm-spl;
++		vbus-supply = <0x33>;
++	};
++
++	vcc5v0-host-xhci-drv {
++		compatible = "regulator-fixed";
++		enable-active-high;
++		gpio = <0x40 0x00 0x00>;
++		phandle = <0x33>;
++		regulator-max-microvolt = <0x4c4b40>;
++		regulator-min-microvolt = <0x4c4b40>;
++		regulator-name = "vcc5v0_host_xhci";
++		u-boot,dm-spl;
++	};
++
++	vcc5v0-otg-drv {
++		compatible = "regulator-fixed";
++		enable-active-high;
++		gpio = <0x40 0x1b 0x00>;
++		phandle = <0x31>;
++		regulator-max-microvolt = <0x4c4b40>;
++		regulator-min-microvolt = <0x4c4b40>;
++		regulator-name = "vcc5v0_otg";
++		u-boot,dm-spl;
++	};
++};

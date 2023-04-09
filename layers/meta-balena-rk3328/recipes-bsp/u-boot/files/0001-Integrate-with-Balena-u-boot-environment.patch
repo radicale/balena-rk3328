@@ -13,7 +13,7 @@ diff --git a/include/config_distro_bootcmd.h b/include/config_distro_bootcmd.h
 index fc0935fa21..9cc8c094eb 100644
 --- a/include/config_distro_bootcmd.h
 +++ b/include/config_distro_bootcmd.h
-@@ -464,7 +464,7 @@
+@@ -371,7 +371,7 @@
  		"\0"                                                      \
  	\
  	"scan_dev_for_boot_part="                                         \

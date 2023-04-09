@@ -20,9 +20,13 @@ TRUST_START = "12288"
 
 
 device_specific_configuration() {
-    parted -s ${BALENA_RAW_IMG} unit KiB mkpart ${UBOOT_NAME} ${UBOOT_START} ${TRUST_START}
-    parted -s ${BALENA_RAW_IMG} unit KiB mkpart ${TRUST_NAME} ${TRUST_START} ${DEVICE_SPECIFIC_SPACE}
+    #parted -s ${BALENA_RAW_IMG} unit KiB mkpart ${UBOOT_NAME} ${UBOOT_START} ${TRUST_START}
+    #parted -s ${BALENA_RAW_IMG} unit KiB mkpart ${TRUST_NAME} ${TRUST_START} ${DEVICE_SPECIFIC_SPACE}
     dd if=${DEPLOY_DIR_IMAGE}/${IDBLOCK_NAME}.img of=${BALENA_RAW_IMG} conv=notrunc bs=1024 seek=${IDBLOCK_START}
     dd if=${DEPLOY_DIR_IMAGE}/${UBOOT_NAME}.img of=${BALENA_RAW_IMG} conv=notrunc bs=1024 seek=${UBOOT_START}
     dd if=${DEPLOY_DIR_IMAGE}/${TRUST_NAME}.img of=${BALENA_RAW_IMG} conv=notrunc bs=1024 seek=${TRUST_START}
+}
+IMAGE_CMD:balenaos-img:append() {
+    parted -s ${BALENA_RAW_IMG} unit KiB mkpart ${UBOOT_NAME} ${UBOOT_START} ${TRUST_START}
+    parted -s ${BALENA_RAW_IMG} unit KiB mkpart ${TRUST_NAME} ${TRUST_START} ${DEVICE_SPECIFIC_SPACE}
 }

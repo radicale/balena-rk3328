@@ -9,8 +9,7 @@ python () {
     d.setVar('KERNEL_IMAGETYPE_FOR_MAKE', d.getVar('KERNEL_IMAGETYPES'));
 }
 
-SRC_URI:append = " file://0001-rk3328-evb-dts-rng.patch \
-    file://0002-rk3328-evb-dts-spi0.patch \
+SRC_URI:append = " file://heltec-m2808-device-tree.patch \
     file://dwmac-rockchip.cfg \
 "
 

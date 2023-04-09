@@ -1,13 +1,14 @@
-diff --git a/arch/arm/dts/rk3328-evb-u-boot.dtsi b/arch/arm/dts/rk3328-evb-u-boot.dtsi
+diff --git a/arch/arm/dts/rk3328-evb.dts b/arch/arm/dts/rk3328-evb.dts
 index 4bfa0c2330..c53591df26 100644
---- a/arch/arm/dts/rk3328-evb-u-boot.dtsi
-+++ b/arch/arm/dts/rk3328-evb-u-boot.dtsi
+--- a/arch/arm/dts/rk3328-evb.dts
++++ b/arch/arm/dts/rk3328-evb.dts
 @@ -4,7 +4,7 @@
-  */
  
- #include "rk3328-u-boot.dtsi"
+ /dts-v1/;
+ #include "rk3328.dtsi"
 -#include "rk3328-sdram-ddr3-666.dtsi"
 +#include "rk3328-sdram-ddr4-666.dtsi"
- 
- /{
- 	gmac_clkin: external-gmac-clock {
+ #include <dt-bindings/input/input.h>
+
+ / {
+
